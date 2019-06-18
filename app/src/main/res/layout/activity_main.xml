@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id="@+id/rel"
+    android:background="#010a4d"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="20sp"
+        android:gravity="center"
+        android:background="#dc5699"
+        android:text="Time lapsed - 00:00"
+        android:textColor="#000000"
+        android:id="@+id/timer"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:padding="10sp"
+        android:layout_marginTop="60sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginLeft="20sp"
+        android:id="@+id/winner"
+        android:text="WINS"
+        android:gravity="center_horizontal"
+        android:textColor="#4BB543"
+        android:background="#6aef7a"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tp"
+        android:text="WRONG TAP"
+        android:layout_margin="20sp"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:padding="10sp"
+        android:textColor="#ad0808"
+        android:textSize="30sp"
+        android:background="#ef5f5f"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="START OVER"
+        android:id="@+id/again"
+        android:onClick="again"
+        android:textColor="#000"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="40sp"
+        android:layout_marginStart="100sp"
+        android:layout_marginEnd="100sp"
+        />
+
+</FrameLayout>
