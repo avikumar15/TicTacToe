@@ -12,8 +12,11 @@
             import android.graphics.Color;
             import android.graphics.Paint;
             import android.media.MediaPlayer;
+            import android.os.Bundle;
             import android.os.Handler;
             import android.os.Message;
+            import android.os.Parcel;
+            import android.os.Parcelable;
             import android.preference.PreferenceManager;
             import android.view.MotionEvent;
             import android.view.View;
@@ -27,10 +30,15 @@
             import static android.content.Context.MODE_PRIVATE;
 
             public class GameFrame extends View {
+
+
                 Paint p1, p2;
                 Context con;
 
                 static int victory=0;
+
+
+                static int minmin=99999;
 
                 public static final String min = "khana";
                 public static final String sec = "peena";
@@ -788,6 +796,20 @@
                                 timer.cancel();
                                 timeee.setText(String.format("Time lapsed - %02d:%02d", minutes, seconds));
                                 gamewon=1;
+
+                                if(minmin>(minutes*60+seconds))
+                                {
+                                    minmin=minutes*60+seconds;
+                                }
+
+                                //send this back
+                                SharedPreferences sharedPreferences2 = con.getSharedPreferences("MyPrefs2", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+
+                                editor2.clear();
+                                editor2.putInt("Best",minmin);
+                                editor2.apply();
+
                                 System.out.println(minutes+":"+seconds);
                                 again.setVisibility(VISIBLE);
                                 ff=1;

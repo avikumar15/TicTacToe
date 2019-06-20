@@ -37,6 +37,7 @@ public class StartActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt("min", 999);
         savedInstanceState.putInt("sec", 999);
+        savedInstanceState.putInt("minmin", 999999);
     }
 
     @Override
@@ -53,20 +54,18 @@ public class StartActivity extends AppCompatActivity {
         timeis = (TextView)findViewById(R.id.best);
         buttongroup.setVisibility(View.INVISIBLE);
 
-        while(Integer.parseInt(tim[l])!=9999)
-        {
-            l++;
-            least=Integer.parseInt(tim[l]);
-        }
-        z=l;
-        for(l=z;((l<(z+DatabaseActivity.count)));l++)
-        {
-            if(Integer.parseInt(tim[l])<least && Integer.parseInt(tim[l])!=9999)
-                least=Integer.parseInt(tim[l]);
-        }
 
+        SharedPreferences sharedPreferences2 = getSharedPreferences("MyPrefs2",MODE_PRIVATE);
+
+        int ansans=sharedPreferences2.getInt("Best",-1);
+
+        if(ansans==-1)
         timeis.setVisibility(View.INVISIBLE);
-        timeis.setText("Best Time is "+least);
+        else
+        {
+            timeis.setVisibility(View.VISIBLE);
+            timeis.setText("Best Time is "+ansans+" secs");
+        }
     }
 
     public void Single (View single)

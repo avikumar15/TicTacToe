@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.View;
+import android.widget.LinearLayout;
 
 public class Database extends SQLiteOpenHelper {
 
@@ -41,6 +43,13 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+TABLE_NAME,null);
         return res;
+    }
+
+    public void DeleteTable(LinearLayout l)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, null, null);
+        l.setVisibility(View.INVISIBLE);
     }
 
 }

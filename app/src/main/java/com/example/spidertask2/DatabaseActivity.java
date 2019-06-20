@@ -1,6 +1,8 @@
 package com.example.spidertask2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -9,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +27,9 @@ public class DatabaseActivity extends AppCompatActivity {
     String[] diff = {"HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE","HELLO HOW ARE"};
     public static String[] tim={"9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999","9999"};
     int i,j;
+
+    Button reset;
+    Cursor res;
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState)
@@ -71,6 +77,9 @@ public class DatabaseActivity extends AppCompatActivity {
         head=(TextView)findViewById(R.id.head);
         head.setVisibility(View.VISIBLE);
 
+        reset=(Button)findViewById(R.id.reset);
+        reset.setVisibility(View.VISIBLE);
+
         System.out.println("mode is : "+mode);
         System.out.println("sec is : "+sec);
 
@@ -78,11 +87,15 @@ public class DatabaseActivity extends AppCompatActivity {
         myDb.insertData(modeis,sec);
 
         {
-            Cursor res = myDb.getAllData();
+            int minim;
+            minim=Integer.parseInt(tim[0]);
+
+            res = myDb.getAllData();
 
             if(res.getCount() == 0) {
+                reset.setVisibility(View.INVISIBLE);
                 head.setVisibility(View.INVISIBLE);
-                showMessage("Error","Nothing found");
+                showMessage("Error","No data to show. Win timing will be shown here once you win.");
                 return;
             }
 
@@ -91,9 +104,16 @@ public class DatabaseActivity extends AppCompatActivity {
                 srno[count] = res.getString(0);
                 diff[count] = res.getString(1);
                 tim[count] = res.getString(2);
+
+                if(Integer.parseInt(tim[count])<minim)
+                    minim = Integer.parseInt(tim[count]);
+
                 count++;
             }
             System.out.println(srno[0]+" "+diff[0]+" "+tim[0]);
+
+
+
             CreateTable();
             count=0;
         }
@@ -113,6 +133,7 @@ public class DatabaseActivity extends AppCompatActivity {
         layoutdata=findViewById(R.id.layoutdata);
         table = new LinearLayout(this);
         table.setOrientation(LinearLayout.HORIZONTAL);
+        table.setVisibility(View.VISIBLE);
         column = new LinearLayout[3];
         for(i=0;i<3;i++)
         {
@@ -144,17 +165,24 @@ public class DatabaseActivity extends AppCompatActivity {
                 else
                 {
                     if(i==0)
-                        t[j][i].setText(srno[j-1]);
+                        t[j][i].setText(Integer.toString(j));
                     else if(i==1)
                         t[j][i].setText(diff[j-1]);
-                    else if(i==2)
-                        t[j][i].setText(tim[j-1]+" sec");
-                }
+                    else if(i==2) {
+                        t[j][i].setText(tim[j - 1] + " sec");
+                    }
+                    }
                 column[i].addView(t[j][i]);
             }
 
         table.setGravity(Gravity.CENTER_HORIZONTAL);
         layoutdata.addView(table);
+    }
+
+    public void reset (View viewview)
+    {
+        myDb.DeleteTable(table);
+
     }
     }
 
