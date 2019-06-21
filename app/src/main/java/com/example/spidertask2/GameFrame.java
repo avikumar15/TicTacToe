@@ -29,6 +29,9 @@
 
             import static android.content.Context.MODE_PRIVATE;
 
+
+
+
             public class GameFrame extends View {
 
 
@@ -37,8 +40,6 @@
 
                 static int victory=0;
 
-
-                static int minmin=99999;
 
                 public static final String min = "khana";
                 public static final String sec = "peena";
@@ -73,6 +74,7 @@
                 ValueAnimator timer;
 
                 long time;
+                static int minmin=999999;
 
                 public static float cx = 1f;
                 public static float cy = 1f;
@@ -95,7 +97,6 @@
                     p2.setColor(Color.parseColor("#fffaf0"));
 
                     p1.setStyle(Paint.Style.STROKE);
-
                     tend=t;
                     winner=w;
                     f=fl;
@@ -105,6 +106,7 @@
                     int secondsToRun = 9999;
 
                     timeee = chaipeekarjana;
+
 
                     if(flagtime==1) {
                         timer = ValueAnimator.ofInt(secondsToRun);

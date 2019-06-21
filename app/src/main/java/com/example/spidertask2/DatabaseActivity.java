@@ -55,6 +55,7 @@ public class DatabaseActivity extends AppCompatActivity {
         mode = intentt.getIntExtra(StartActivity.EXTRAMODE,9);
         sec = intentt.getIntExtra(StartActivity.EXTRATIME,99999);
 
+
         switch(mode)
         {
             case 1 :

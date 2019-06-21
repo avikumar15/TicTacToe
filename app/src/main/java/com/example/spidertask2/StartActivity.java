@@ -1,8 +1,11 @@
 package com.example.spidertask2;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +40,6 @@ public class StartActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt("min", 999);
         savedInstanceState.putInt("sec", 999);
-        savedInstanceState.putInt("minmin", 999999);
     }
 
     @Override
@@ -45,6 +47,7 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_start);
+
 
         Intent i = getIntent();
         gamewonb=i.getIntExtra(MainActivity.gamewona,0);

@@ -1,20 +1,28 @@
 package com.example.spidertask2;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     public static float cx = 1f;
     public static float cy = 1f;
+
+    private ActionBar actionBar;
 
     public static float centerx=1f;
     public static float centery=1f;
@@ -29,15 +37,25 @@ public class MainActivity extends AppCompatActivity {
     Button again;
     TextView timer;
 
+    int minmin;
+
     int k;
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState)
+    {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt("minmin", 999999);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.activity_main);
-        margaya();
 
+        setContentView(R.layout.activity_main);
+
+        margaya();
 
     }
 
